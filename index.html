@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Reloj digital con fecha</title>
+    <link rel="stylesheet" href="estilos.css">
+  </head>
+  
+  <body onload="initClock()">
+
+    <!--mi primer relog digital-->
+    <div class="datosytiempo">
+      <div class="dato">
+        <span id="nombre de dia">Day</span>,
+        <span id="mes">Month</span>
+        <span id="sorpresa">00</span>,
+        <span id="año">Year</span>
+      </div>
+      <div class="tiempo">
+        <span id="hora">00</span>:
+        <span id="minutos">00</span>:
+        <span id="segundos">00</span>
+        <span id="período">AM</span>
+      </div>
+    </div>
+    <!--aqui termina-->
+
+    <script type="text/javascript">
+    function updateClock(){
+      var now = new Date();
+      var dname = now.getDay(),
+          mo = now.getMonth(),
+          dnum = now.getDate(),
+          yr = now.getFullYear(),
+          hou = now.getHours(),
+          min = now.getMinutes(),
+          sec = now.getSeconds(),
+          pe = "AM";
+
+          if(hou >= 12){
+            pe = "PM";
+          }
+          if(hou == 0){
+            hou = 12;
+          }
+          if(hou > 12){
+            hou = hou - 12;
+          }
+
+          Number.prototype.pad = function(digits){
+            for(var n = this.toString(); n.length < digits; n = 0 + n);
+            return n;
+          }
+
+          var months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"];
+          var week = ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
+          var ids = ["nombre de dia", "mes", "sorpresa", "año", "hora", "minutos", "segundos", "período"];
+          var values = [week[dname], months[mo], dnum.pad(2), yr, hou.pad(2), min.pad(2), sec.pad(2), pe];
+          for(var i = 0; i < ids.length; i++)
+          document.getElementById(ids[i]).firstChild.nodeValue = values[i];
+    }
+
+    function initClock(){
+      updateClock();
+      window.setInterval("updateClock()", 1);
+    }
+  
+    </script>
+
+  </body>
+  <p>Mi primer relog DRAK</p>
+  
+</html>
+      
